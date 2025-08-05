@@ -221,387 +221,399 @@ export default function POS() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-emerald-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
-      {/* Professional Header */}
       <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="bg-white/70 dark:bg-gray-800/70 backdrop-blur-xl border border-white/20 dark:border-gray-600/20 rounded-2xl m-6 mb-4 p-6 shadow-xl"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.3 }}
+        className="p-3 space-y-3"
       >
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="p-3 rounded-xl bg-gradient-to-r from-green-500 to-emerald-500 text-white">
-              <Package className="h-6 w-6" />
-            </div>
-            <div>
-              <h1 className="text-2xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
-                Point of Sale
-              </h1>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
-                Professional product management system
-              </p>
-            </div>
-          </div>
-          <div className="lg:hidden flex items-center gap-2">
-            <Button variant="outline" size="icon" className="relative border-green-200 hover:border-green-300">
-              <ShoppingCart className="h-5 w-5" />
-              {cart.length > 0 && (
-                <span className="absolute -top-2 -right-2 bg-gradient-to-r from-green-500 to-emerald-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                  {cart.length}
-                </span>
-              )}
-            </Button>
-          </div>
-        </div>
-      </motion.div>
-
-      <div className="max-w-7xl mx-auto px-6 pb-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Left Column - Product Catalog */}
+        {/* Header Section */}
         <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.1 }}
-          className="lg:col-span-2 space-y-6"
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.2 }}
+          className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-white/30 dark:border-gray-600/30 rounded-xl p-4 shadow-lg"
         >
-          {/* Search and Barcode Section */}
-          <div className="bg-white/70 dark:bg-gray-800/70 backdrop-blur-xl border border-white/20 dark:border-gray-600/20 rounded-2xl p-6 shadow-xl">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="relative">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
-                <Input
-                  placeholder="Search products..."
-                  className="pl-10 bg-white/50 dark:bg-gray-700/50 border-white/20 dark:border-gray-600/20 focus:border-green-300 dark:focus:border-green-600 transition-all duration-300"
-                  value={searchQuery}
-                  onChange={handleSearchChange}
-                />
-                {searchLoading && (
-                  <Loader2 className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400 animate-spin" />
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <div className="p-2 rounded-lg bg-gradient-to-r from-green-500 to-emerald-500 text-white">
+                <Package className="h-4 w-4" />
+              </div>
+              <h2 className="text-lg font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
+                Point of Sale
+              </h2>
+            </div>
+            <div className="lg:hidden flex items-center gap-2">
+              <Button variant="outline" size="sm" className="relative border-green-200 hover:border-green-300">
+                <ShoppingCart className="h-4 w-4" />
+                {cart.length > 0 && (
+                  <span className="absolute -top-1 -right-1 bg-gradient-to-r from-green-500 to-emerald-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
+                    {cart.length}
+                  </span>
                 )}
-              </div>
-              <div className="relative">
-                <Barcode className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
-                <Input
-                  placeholder="Scan barcode"
-                  className="pl-10 bg-white/50 dark:bg-gray-700/50 border-white/20 dark:border-gray-600/20 focus:border-green-300 dark:focus:border-green-600 transition-all duration-300"
-                />
-              </div>
+              </Button>
             </div>
           </div>
+        </motion.div>
 
-          {/* Category Tabs */}
-          <div className="bg-white/70 dark:bg-gray-800/70 backdrop-blur-xl border border-white/20 dark:border-gray-600/20 rounded-2xl p-6 shadow-xl">
-            <div className="overflow-x-auto">
-              <div className="flex space-x-2">
-                {categories.map(category => (
-                  <motion.div
-                    key={category.id}
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <Button
-                      variant={selectedCategory === category.id ? "default" : "outline"}
-                      size="sm"
-                      onClick={() => {
-                        setSelectedCategory(category.id);
-                        setPage(1);
-                      }}
-                      className={`whitespace-nowrap transition-all duration-300 ${selectedCategory === category.id
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-3">
+          {/* Left Column - Product Catalog */}
+          <motion.div
+            initial={{ opacity: 0, x: -10 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.1 }}
+            className="lg:col-span-2 space-y-3"
+          >
+            {/* Search and Barcode Section */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+              className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-white/30 dark:border-gray-600/30 rounded-xl p-3 shadow-lg"
+            >
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <div className="relative">
+                  <Search className="absolute left-2 top-1/2 -translate-y-1/2 h-3 w-3 text-gray-400" />
+                  <Input
+                    placeholder="Search products..."
+                    className="pl-8 h-8 text-sm bg-white/50 dark:bg-gray-700/50 border-white/20 dark:border-gray-600/20 focus:border-green-300 dark:focus:border-green-600 transition-colors"
+                    value={searchQuery}
+                    onChange={handleSearchChange}
+                  />
+                  {searchLoading && (
+                    <Loader2 className="absolute right-2 top-1/2 -translate-y-1/2 h-3 w-3 text-gray-400 animate-spin" />
+                  )}
+                </div>
+                <div className="relative">
+                  <Barcode className="absolute left-2 top-1/2 -translate-y-1/2 h-3 w-3 text-gray-400" />
+                  <Input
+                    placeholder="Scan barcode"
+                    className="pl-8 h-8 text-sm bg-white/50 dark:bg-gray-700/50 border-white/20 dark:border-gray-600/20 focus:border-green-300 dark:focus:border-green-600 transition-colors"
+                  />
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Category Tabs */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.15 }}
+              className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-white/30 dark:border-gray-600/30 rounded-xl p-3 shadow-lg"
+            >
+              <div className="overflow-x-auto">
+                <div className="flex space-x-2">
+                  {categories.map(category => (
+                    <motion.div
+                      key={category.id}
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                    >
+                      <Button
+                        variant={selectedCategory === category.id ? "default" : "outline"}
+                        size="sm"
+                        onClick={() => {
+                          setSelectedCategory(category.id);
+                          setPage(1);
+                        }}
+                        className={`whitespace-nowrap transition-all duration-300 ${selectedCategory === category.id
                           ? "bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white border-0 shadow-lg"
                           : "border-green-200 hover:border-green-300 hover:bg-green-50 dark:border-green-800 dark:hover:bg-green-900/20"
-                        }`}
-                    >
-                      {category.name}
-                    </Button>
-                  </motion.div>
-                ))}
+                          }`}
+                      >
+                        {category.name}
+                      </Button>
+                    </motion.div>
+                  ))}
+                </div>
               </div>
-            </div>
-          </div>
+            </motion.div>
 
-          {/* Product Grid */}
-          <div className="bg-white/70 dark:bg-gray-800/70 backdrop-blur-xl border border-white/20 dark:border-gray-600/20 rounded-2xl p-6 shadow-xl">
-            {isLoading ? (
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-                {Array.from({ length: itemsPerPage }).map((_, index) => (
-                  <ProductSkeleton key={index} />
-                ))}
-              </div>
-            ) : (
-              <>
-                <AnimatePresence mode="wait">
-                  {filteredProducts.length > 0 ? (
-                    <motion.div
-                      key="products"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4"
-                    >
-                      {paginatedProducts.map((product, index) => (
-                        <motion.div
-                          key={product.id}
-                          initial={{ opacity: 0, y: 20 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ delay: index * 0.05 }}
-                          whileHover={{ scale: 1.02 }}
-                          whileTap={{ scale: 0.98 }}
-                        >
-                          <Card className="bg-white/50 dark:bg-gray-700/50 backdrop-blur-sm border border-white/20 dark:border-gray-600/20 hover:shadow-xl hover:border-green-200 dark:hover:border-green-600 transition-all duration-300 group">
-                            <div className="aspect-square relative overflow-hidden rounded-t-lg">
-                              <Image
-                                src={product?.images || "/Pos1.png"}
-                                alt={product.name}
-                                fill
-                                className="object-cover group-hover:scale-105 transition-transform duration-300"
-                                sizes="(max-width: 768px) 100vw, 33vw"
-                              />
-                            </div>
-                            <CardContent className="p-4 space-y-2">
-                              <h3 className="font-semibold text-sm line-clamp-1 text-gray-900 dark:text-white">{product.name}</h3>
-                              <p className="text-sm text-gray-600 dark:text-gray-400">
-                                PKR {product.price.toFixed(2)}{product?.unit && `/${product?.unit}`}
-                              </p>
-                              <motion.div
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                              >
+
+            {/* Product Grid */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-white/30 dark:border-gray-600/30 rounded-xl p-3 shadow-lg"
+            >
+              {isLoading ? (
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2">
+                  {Array.from({ length: itemsPerPage }).map((_, index) => (
+                    <ProductSkeleton key={index} />
+                  ))}
+                </div>
+              ) : (
+                <>
+                  <AnimatePresence mode="wait">
+                    {filteredProducts.length > 0 ? (
+                      <motion.div
+                        key="products"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.2 }}
+                        className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2"
+                      >
+                        {paginatedProducts.map((product, index) => (
+                          <motion.div
+                            key={product.id}
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: index * 0.02 }}
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
+                          >
+                            <Card className="bg-white/50 dark:bg-gray-700/50 backdrop-blur-sm border border-white/20 dark:border-gray-600/20 hover:shadow-md hover:border-green-200 dark:hover:border-green-600 transition-all duration-200 group">
+                              <div className="aspect-square relative overflow-hidden rounded-t-lg">
+                                <Image
+                                  src={product?.images || "/Pos1.png"}
+                                  alt={product.name}
+                                  fill
+                                  className="object-cover group-hover:scale-105 transition-transform duration-200"
+                                  sizes="(max-width: 768px) 100vw, 20vw"
+                                />
+                              </div>
+                              <CardContent className="p-2 space-y-1">
+                                <h3 className="font-medium text-xs line-clamp-1 text-gray-900 dark:text-white">{product.name}</h3>
+                                <p className="text-xs text-green-600 dark:text-green-400 font-semibold">
+                                  PKR {product.price.toFixed(2)}{product?.unit && `/${product?.unit}`}
+                                </p>
                                 <Button
                                   size="sm"
-                                  className="w-full mt-2 bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white border-0 shadow-lg"
+                                  className="w-full h-7 text-xs bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white border-0 shadow-sm"
                                   onClick={() => addToCart(product.id)}
                                 >
-                                  <Plus className="h-4 w-4 mr-1" /> Add to Cart
+                                  <Plus className="h-3 w-3 mr-1" /> Add
                                 </Button>
-                              </motion.div>
-                            </CardContent>
-                          </Card>
-                        </motion.div>
-                      ))}
-                    </motion.div>
-                  ) : (
-                    <motion.div
-                      key="no-products"
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0, scale: 0.9 }}
-                      className="text-center py-12"
-                    >
-                      <div className="bg-gradient-to-r from-green-100 to-emerald-100 dark:from-green-900/20 dark:to-emerald-900/20 rounded-xl p-8">
-                        <Package className="h-12 w-12 mx-auto mb-4 text-gray-400" />
-                        <p className="text-lg text-gray-600 dark:text-gray-400">
-                          No products found matching your search.
-                        </p>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-
-                {/* Pagination */}
-                {totalPages > 1 && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="flex items-center justify-center gap-2 mt-6 pt-6 border-t border-white/20 dark:border-gray-600/20"
-                  >
-                    <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        disabled={page === 1}
-                        onClick={() => setPage(p => Math.max(p - 1, 1))}
-                        className="border-green-200 hover:border-green-300 hover:bg-green-50 dark:border-green-800 dark:hover:bg-green-900/20 disabled:opacity-50"
-                      >
-                        <ChevronLeft className="h-4 w-4 mr-1" /> Prev
-                      </Button>
-                    </motion.div>
-                    <div className="flex items-center gap-1">
-                      {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
-                        let pageNum;
-                        if (totalPages <= 5) {
-                          pageNum = i + 1;
-                        } else if (page <= 3) {
-                          pageNum = i + 1;
-                        } else if (page >= totalPages - 2) {
-                          pageNum = totalPages - 4 + i;
-                        } else {
-                          pageNum = page - 2 + i;
-                        }
-                        return (
-                          <motion.div key={pageNum} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                            <Button
-                              variant={page === pageNum ? "default" : "outline"}
-                              size="sm"
-                              onClick={() => setPage(pageNum)}
-                              className={page === pageNum
-                                ? "bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white border-0 shadow-lg"
-                                : "border-green-200 hover:border-green-300 hover:bg-green-50 dark:border-green-800 dark:hover:bg-green-900/20"
-                              }
-                            >
-                              {pageNum}
-                            </Button>
+                              </CardContent>
+                            </Card>
                           </motion.div>
-                        );
-                      })}
-                      {totalPages > 5 && page < totalPages - 2 && (
-                        <span className="px-2 text-gray-500">...</span>
-                      )}
-                    </div>
-                    <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        disabled={page === totalPages}
-                        onClick={() => setPage(p => Math.min(p + 1, totalPages))}
-                        className="border-green-200 hover:border-green-300 hover:bg-green-50 dark:border-green-800 dark:hover:bg-green-900/20 disabled:opacity-50"
-                      >
-                        Next <ChevronRight className="h-4 w-4 ml-1" />
-                      </Button>
-                    </motion.div>
-                  </motion.div>
-                )}
-              </>
-            )}
-          </div>
-        </motion.div>
-
-        {/* Right Column - Cart */}
-        <motion.div
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.2 }}
-          className="lg:sticky lg:top-4 lg:h-[calc(100vh-2rem)] flex flex-col"
-        >
-          <Card className="flex-1 flex flex-col bg-white/70 dark:bg-gray-800/70 backdrop-blur-xl border border-white/20 dark:border-gray-600/20 shadow-xl">
-            <CardHeader className="border-b border-white/20 dark:border-gray-600/20">
-              <div className="flex items-center justify-between">
-                <CardTitle className="text-xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
-                  Order Summary
-                </CardTitle>
-                <div className="flex items-center gap-2 bg-gradient-to-r from-green-100 to-emerald-100 dark:from-green-900/20 dark:to-emerald-900/20 px-3 py-1 rounded-full">
-                  <ShoppingCart className="h-4 w-4 text-green-600" />
-                  <span className="font-medium text-sm text-green-700 dark:text-green-300">{cartItems.length} items</span>
-                </div>
-              </div>
-            </CardHeader>
-            <CardContent className="flex-1 overflow-y-auto p-0">
-              {cartItems.length === 0 ? (
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  className="h-full flex flex-col items-center justify-center p-6 text-center"
-                >
-                  <div className="bg-gradient-to-br from-green-100 to-emerald-100 dark:from-green-900/20 dark:to-emerald-900/20 p-6 rounded-full mb-4">
-                    <ShoppingCart className="h-10 w-10 text-green-600" />
-                  </div>
-                  <p className="text-gray-600 dark:text-gray-300 font-medium">Your cart is empty</p>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">Add products to get started</p>
-                </motion.div>
-              ) : (
-                <div className="p-4 space-y-3">
-                  <AnimatePresence>
-                    {cartItems.map((item, index) => (
+                        ))}
+                      </motion.div>
+                    ) : (
                       <motion.div
-                        key={item.id}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, x: -100 }}
-                        transition={{ delay: index * 0.1 }}
-                        className="flex items-start gap-3 p-3 bg-white/50 dark:bg-gray-700/50 backdrop-blur-sm border border-white/20 dark:border-gray-600/20 rounded-xl shadow-sm hover:shadow-md transition-all duration-200"
+                        key="no-products"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.2 }}
+                        className="text-center py-6"
                       >
-                        <div className="w-16 h-16 rounded-lg overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-800">
-                          <Image
-                            src={item.product?.images || "/Pos1.png"}
-                            alt={item.product?.name || "Product Image"}
-                            width={64}
-                            height={64}
-                            className="object-cover w-full h-full"
-                          />
-                        </div>
-                        <div className="flex-1">
-                          <h4 className="font-medium text-gray-800 dark:text-gray-200">{item.product?.name}</h4>
-                          <p className="text-sm text-green-600 dark:text-green-400 font-semibold">
-                            PKR {item.product?.price.toFixed(2)}
-                            {item.product?.unit && `/${item.product?.unit}`}
+                        <div className="bg-gradient-to-r from-green-100 to-emerald-100 dark:from-green-900/20 dark:to-emerald-900/20 rounded-lg p-4">
+                          <p className="text-sm text-gray-600 dark:text-gray-400">
+                            No products found matching your search.
                           </p>
-                          <div className="flex items-center gap-2 mt-2">
-                            <motion.button
-                              whileHover={{ scale: 1.1 }}
-                              whileTap={{ scale: 0.9 }}
-                              onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                              className="h-8 w-8 rounded-lg bg-gradient-to-r from-red-100 to-pink-100 dark:from-red-900/20 dark:to-pink-900/20 border border-red-200 dark:border-red-700/30 flex items-center justify-center hover:from-red-200 hover:to-pink-200 transition-all duration-200"
-                            >
-                              <Minus className="h-3 w-3 text-red-600" />
-                            </motion.button>
-                            <span className="w-8 text-center text-sm font-medium bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">{item.quantity}</span>
-                            <motion.button
-                              whileHover={{ scale: 1.1 }}
-                              whileTap={{ scale: 0.9 }}
-                              onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                              className="h-8 w-8 rounded-lg bg-gradient-to-r from-green-100 to-emerald-100 dark:from-green-900/20 dark:to-emerald-900/20 border border-green-200 dark:border-green-700/30 flex items-center justify-center hover:from-green-200 hover:to-emerald-200 transition-all duration-200"
-                            >
-                              <Plus className="h-3 w-3 text-green-600" />
-                            </motion.button>
-                          </div>
-                        </div>
-                        <div className="text-right">
-                          <p className="font-bold text-gray-800 dark:text-gray-200">
-                            PKR {((item.product?.price || 0) * item.quantity).toFixed(2)}
-                          </p>
-                          <motion.button
-                            whileHover={{ scale: 1.1 }}
-                            whileTap={{ scale: 0.9 }}
-                            onClick={() => removeFromCart(item.id)}
-                            className="mt-1 h-8 w-8 rounded-lg bg-gradient-to-r from-red-100 to-pink-100 dark:from-red-900/20 dark:to-pink-900/20 border border-red-200 dark:border-red-700/30 flex items-center justify-center hover:from-red-200 hover:to-pink-200 transition-all duration-200"
-                          >
-                            <Trash2 className="h-4 w-4 text-red-600" />
-                          </motion.button>
                         </div>
                       </motion.div>
-                    ))}
+                    )}
                   </AnimatePresence>
-                </div>
-              )}
-            </CardContent>
-            <div className="border-t border-white/20 dark:border-gray-600/20 p-4 space-y-4 bg-white/30 dark:bg-gray-800/30 backdrop-blur-sm">
-              <div className="space-y-2">
-                <div className="flex justify-between">
-                  <span className="text-gray-600 dark:text-gray-400">Subtotal</span>
-                  <span className="font-medium">PKR {subtotal.toFixed(2)}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600 dark:text-gray-400">Tax ({TAX_RATE * 100}%)</span>
-                  <span className="font-medium">PKR {tax.toFixed(2)}</span>
-                </div>
-                <div className="flex justify-between font-bold text-lg bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
-                  <span>Total</span>
-                  <span>PKR {total.toFixed(2)}</span>
-                </div>
-              </div>
 
-              <div className="grid grid-cols-2 gap-2">
+                  {/* Pagination */}
+                  {totalPages > 1 && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="flex items-center justify-center gap-2 mt-3 pt-3 border-t border-white/20 dark:border-gray-600/20"
+                    >
+                      <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          disabled={page === 1}
+                          onClick={() => setPage(p => Math.max(p - 1, 1))}
+                          className="h-8 border-green-200 hover:border-green-300 hover:bg-green-50 dark:border-green-800 dark:hover:bg-green-900/20 disabled:opacity-50"
+                        >
+                          <ChevronLeft className="h-3 w-3 mr-1" /> Prev
+                        </Button>
+                      </motion.div>
+                      <div className="flex items-center gap-1">
+                        {Array.from({ length: Math.min(3, totalPages) }, (_, i) => {
+                          let pageNum;
+                          if (totalPages <= 3) {
+                            pageNum = i + 1;
+                          } else if (page <= 2) {
+                            pageNum = i + 1;
+                          } else if (page >= totalPages - 1) {
+                            pageNum = totalPages - 2 + i;
+                          } else {
+                            pageNum = page - 1 + i;
+                          }
+                          return (
+                            <motion.div key={pageNum} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                              <Button
+                                variant={page === pageNum ? "default" : "outline"}
+                                size="sm"
+                                onClick={() => setPage(pageNum)}
+                                className={`h-8 w-8 p-0 ${page === pageNum
+                                  ? "bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white border-0 shadow-sm"
+                                  : "border-green-200 hover:border-green-300 hover:bg-green-50 dark:border-green-800 dark:hover:bg-green-900/20"
+                                  }`}
+                              >
+                                {pageNum}
+                              </Button>
+                            </motion.div>
+                          );
+                        })}
+                      </div>
+                      <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          disabled={page === totalPages}
+                          onClick={() => setPage(p => Math.min(p + 1, totalPages))}
+                          className="h-8 border-green-200 hover:border-green-300 hover:bg-green-50 dark:border-green-800 dark:hover:bg-green-900/20 disabled:opacity-50"
+                        >
+                          Next <ChevronRight className="h-3 w-3 ml-1" />
+                        </Button>
+                      </motion.div>
+                    </motion.div>
+                  )}
+                </>
+              )}
+            </motion.div>
+          </motion.div>
+
+          {/* Right Column - Cart */}
+          <motion.div
+            initial={{ opacity: 0, x: 10 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.2 }}
+            className="lg:sticky lg:top-4 lg:h-[calc(100vh-2rem)] flex flex-col"
+          >
+            <Card className="flex-1 flex flex-col bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-white/30 dark:border-gray-600/30 shadow-lg">
+              <CardHeader className="border-b border-white/20 dark:border-gray-600/20 p-3">
+                <div className="flex items-center justify-between">
+                  <CardTitle className="text-lg font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
+                    Order Summary
+                  </CardTitle>
+                  <div className="flex items-center gap-1 bg-gradient-to-r from-green-100 to-emerald-100 dark:from-green-900/20 dark:to-emerald-900/20 px-2 py-1 rounded-full">
+                    <ShoppingCart className="h-3 w-3 text-green-600" />
+                    <span className="font-medium text-xs text-green-700 dark:text-green-300">{cartItems.length}</span>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent className="flex-1 overflow-y-auto p-0">
+                {cartItems.length === 0 ? (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="h-full flex flex-col items-center justify-center p-3 text-center"
+                  >
+                    <div className="bg-gradient-to-br from-green-100 to-emerald-100 dark:from-green-900/20 dark:to-emerald-900/20 p-3 rounded-full mb-2">
+                      <ShoppingCart className="h-6 w-6 text-green-600" />
+                    </div>
+                    <p className="text-sm text-gray-600 dark:text-gray-300 font-medium">Your cart is empty</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">Add products to get started</p>
+                  </motion.div>
+                ) : (
+                  <div className="p-2 space-y-2">
+                    <AnimatePresence>
+                      {cartItems.map((item, index) => (
+                        <motion.div
+                          key={item.id}
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, x: -50 }}
+                          transition={{ delay: index * 0.05 }}
+                          className="flex items-start gap-2 p-2 bg-white/50 dark:bg-gray-700/50 backdrop-blur-sm border border-white/20 dark:border-gray-600/20 rounded-lg shadow-sm hover:shadow-md transition-all duration-200"
+                        >
+                          <div className="w-12 h-12 rounded-lg overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-800">
+                            <Image
+                              src={item.product?.images || "/Pos1.png"}
+                              alt={item.product?.name || "Product Image"}
+                              width={48}
+                              height={48}
+                              className="object-cover w-full h-full"
+                            />
+                          </div>
+                          <div className="flex-1">
+                            <h4 className="font-medium text-xs text-gray-800 dark:text-gray-200 line-clamp-1">{item.product?.name}</h4>
+                            <p className="text-xs text-green-600 dark:text-green-400 font-semibold">
+                              PKR {item.product?.price.toFixed(2)}
+                              {item.product?.unit && `/${item.product?.unit}`}
+                            </p>
+                            <div className="flex items-center gap-1 mt-1">
+                              <motion.button
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                                onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                                className="h-6 w-6 rounded bg-gradient-to-r from-red-100 to-pink-100 dark:from-red-900/20 dark:to-pink-900/20 border border-red-200 dark:border-red-700/30 flex items-center justify-center hover:from-red-200 hover:to-pink-200 transition-all duration-200"
+                              >
+                                <Minus className="h-2 w-2 text-red-600" />
+                              </motion.button>
+                              <span className="w-6 text-center text-xs font-medium bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">{item.quantity}</span>
+                              <motion.button
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                                onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                                className="h-6 w-6 rounded bg-gradient-to-r from-green-100 to-emerald-100 dark:from-green-900/20 dark:to-emerald-900/20 border border-green-200 dark:border-green-700/30 flex items-center justify-center hover:from-green-200 hover:to-emerald-200 transition-all duration-200"
+                              >
+                                <Plus className="h-2 w-2 text-green-600" />
+                              </motion.button>
+                            </div>
+                          </div>
+                          <div className="text-right">
+                            <p className="font-bold text-xs text-gray-800 dark:text-gray-200">
+                              PKR {((item.product?.price || 0) * item.quantity).toFixed(2)}
+                            </p>
+                            <motion.button
+                              whileHover={{ scale: 1.05 }}
+                              whileTap={{ scale: 0.95 }}
+                              onClick={() => removeFromCart(item.id)}
+                              className="mt-1 h-6 w-6 rounded bg-gradient-to-r from-red-100 to-pink-100 dark:from-red-900/20 dark:to-pink-900/20 border border-red-200 dark:border-red-700/30 flex items-center justify-center hover:from-red-200 hover:to-pink-200 transition-all duration-200"
+                            >
+                              <Trash2 className="h-3 w-3 text-red-600" />
+                            </motion.button>
+                          </div>
+                        </motion.div>
+                      ))}
+                    </AnimatePresence>
+                  </div>
+                )}
+              </CardContent>
+              <div className="border-t border-white/20 dark:border-gray-600/20 p-3 space-y-3 bg-white/30 dark:bg-gray-800/30 backdrop-blur-sm">
+                <div className="space-y-2">
+                  <div className="flex justify-between text-xs">
+                    <span className="text-gray-600 dark:text-gray-400">Subtotal</span>
+                    <span className="font-medium">PKR {subtotal.toFixed(2)}</span>
+                  </div>
+                  <div className="flex justify-between text-xs">
+                    <span className="text-gray-600 dark:text-gray-400">Tax ({TAX_RATE * 100}%)</span>
+                    <span className="font-medium">PKR {tax.toFixed(2)}</span>
+                  </div>
+                  <div className="flex justify-between font-bold text-sm bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent border-t border-green-200 dark:border-green-700/30 pt-2">
+                    <span>Total</span>
+                    <span>PKR {total.toFixed(2)}</span>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-2">
+                  <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                    <Button variant="outline" className="h-8 w-full text-xs border-green-200 hover:border-green-300 hover:bg-green-50 dark:border-green-800 dark:hover:bg-green-900/20">
+                      <Wallet className="h-3 w-3 mr-1" /> Cash
+                    </Button>
+                  </motion.div>
+                  <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                    <Button variant="outline" className="h-8 w-full text-xs border-green-200 hover:border-green-300 hover:bg-green-50 dark:border-green-800 dark:hover:bg-green-900/20">
+                      <CreditCard className="h-3 w-3 mr-1" /> Card
+                    </Button>
+                  </motion.div>
+                </div>
                 <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                  <Button variant="outline" className="h-12 w-full border-green-200 hover:border-green-300 hover:bg-green-50 dark:border-green-800 dark:hover:bg-green-900/20">
-                    <Wallet className="h-5 w-5 mr-2" /> Cash
-                  </Button>
-                </motion.div>
-                <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                  <Button variant="outline" className="h-12 w-full border-green-200 hover:border-green-300 hover:bg-green-50 dark:border-green-800 dark:hover:bg-green-900/20">
-                    <CreditCard className="h-5 w-5 mr-2" /> Card
+                  <Button
+                    className="w-full h-8 text-xs bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white border-0 shadow-sm disabled:opacity-50 disabled:cursor-not-allowed"
+                    onClick={completeOrder}
+                    disabled={cartItems.length === 0}
+                  >
+                    Complete Order
                   </Button>
                 </motion.div>
               </div>
-              <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                <Button
-                  className="w-full h-12 bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white border-0 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
-                  onClick={completeOrder}
-                  disabled={cartItems.length === 0}
-                >
-                  Complete Order
-                </Button>
-              </motion.div>
-            </div>
-          </Card>
-        </motion.div>
-      </div>
+            </Card>
+          </motion.div>
+        </div>
+      </motion.div>
     </div>
   );
 }

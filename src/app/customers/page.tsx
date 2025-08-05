@@ -134,54 +134,53 @@ export default function CustomersPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-emerald-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="p-6 space-y-6"
+        className="p-4 space-y-4"
       >
         {/* Header Section */}
-        <motion.div 
-          initial={{ opacity: 0, y: -20 }}
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-white/70 dark:bg-gray-800/70 backdrop-blur-xl border border-white/20 dark:border-gray-600/20 rounded-2xl p-6 shadow-xl"
+          className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-white/20 dark:border-gray-600/20 rounded-xl p-4 shadow-lg"
         >
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="p-3 rounded-xl bg-gradient-to-r from-green-500 to-emerald-500 text-white">
-                <Users className="h-6 w-6" />
+            <div className="flex items-center gap-2">
+              <div className="p-2 rounded-lg bg-gradient-to-r from-green-500 to-emerald-500 text-white">
+                <Users className="h-4 w-4" />
               </div>
-              <h1 className="text-3xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
+              <h1 className="text-xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
                 Customers
               </h1>
             </div>
             <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
               onClick={() => alert('PDF Export coming soon...')}
-              className="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white px-4 py-2 rounded-xl shadow-lg flex items-center gap-2 transition-all duration-200"
+              className="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white px-3 py-1.5 rounded-lg shadow-sm flex items-center gap-1.5 transition-all duration-200 text-sm"
             >
-              <Download size={16} /> Export PDF
+              <Download size={14} /> Export PDF
             </motion.button>
           </div>
         </motion.div>
 
         {/* Tab Navigation */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-          className="bg-white/70 dark:bg-gray-800/70 backdrop-blur-xl border border-white/20 dark:border-gray-600/20 rounded-2xl p-2 shadow-xl"
+          transition={{ delay: 0.05 }}
+          className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-white/20 dark:border-gray-600/20 rounded-lg p-1 shadow-lg"
         >
-          <div className="flex gap-2">
+          <div className="flex gap-1">
             <Link href="/customers?tab=all">
               <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className={`px-6 py-3 rounded-xl font-medium transition-all duration-200 ${
-                  activeTab === 'all' 
-                    ? 'bg-gradient-to-r from-green-500 to-emerald-500 text-white shadow-lg' 
+                className={`px-4 py-2 rounded-lg font-medium text-sm transition-all duration-200 ${activeTab === 'all'
+                    ? 'bg-gradient-to-r from-green-500 to-emerald-500 text-white shadow-sm'
                     : 'bg-white/50 dark:bg-gray-700/50 text-gray-700 dark:text-gray-300 hover:bg-white/70 dark:hover:bg-gray-700/70'
-                }`}
+                  }`}
               >
                 All Customers
               </motion.button>
@@ -190,11 +189,10 @@ export default function CustomersPage() {
               <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className={`px-6 py-3 rounded-xl font-medium transition-all duration-200 ${
-                  activeTab === 'add' 
-                    ? 'bg-gradient-to-r from-green-500 to-emerald-500 text-white shadow-lg' 
+                className={`px-4 py-2 rounded-lg font-medium text-sm transition-all duration-200 ${activeTab === 'add'
+                    ? 'bg-gradient-to-r from-green-500 to-emerald-500 text-white shadow-sm'
                     : 'bg-white/50 dark:bg-gray-700/50 text-gray-700 dark:text-gray-300 hover:bg-white/70 dark:hover:bg-gray-700/70'
-                }`}
+                  }`}
               >
                 Add Customer
               </motion.button>
@@ -202,109 +200,219 @@ export default function CustomersPage() {
           </div>
         </motion.div>
 
-      {/* Add Customer */}
-      {activeTab === 'add' && (
-        <div className="bg-white dark:bg-gray-800 p-6 rounded shadow space-y-4">
-          <h3 className="text-lg font-semibold">Add New Customer</h3>
-          <input name="name" value={formData.name} onChange={handleFormChange} placeholder="Full Name" className="w-full px-3 py-2 border rounded" />
-          <input name="phone" value={formData.phone} onChange={handleFormChange} placeholder="Phone" className="w-full px-3 py-2 border rounded" />
-          <input name="email" value={formData.email} onChange={handleFormChange} placeholder="Email" className="w-full px-3 py-2 border rounded" />
-          <input name="address" value={formData.address} onChange={handleFormChange} placeholder="Address" className="w-full px-3 py-2 border rounded" />
-          <select name="type" value={formData.type} onChange={handleFormChange} className="w-full px-3 py-2 border rounded">
-            <option value="Retail">Retail</option>
-            <option value="Wholesale">Wholesale</option>
-          </select>
-          <input name="tags" value={formData.tags.join(',')} onChange={handleFormChange} placeholder="Tags (comma separated)" className="w-full px-3 py-2 border rounded" />
-          <input name="avatar" value={formData.avatar} onChange={handleFormChange} placeholder="Avatar URL (optional)" className="w-full px-3 py-2 border rounded" />
-          <textarea name="notes" value={formData.notes} onChange={handleFormChange} placeholder="Notes" className="w-full px-3 py-2 border rounded" />
-          <button onClick={addCustomer} className="bg-primary text-white px-4 py-2 rounded w-full">Save Customer</button>
-        </div>
-      )}
-
-      {/* All Customers */}
-      {activeTab === 'all' && (
-        <>
-          <div className="flex flex-wrap items-center gap-2 mb-4">
-            <div className="relative w-full max-w-sm">
-              <Search className="absolute left-2 top-2.5 text-gray-400" size={16} />
+        {/* Add Customer */}
+        {activeTab === 'add' && (
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-white/20 dark:border-gray-600/20 rounded-lg p-4 shadow-lg space-y-3"
+          >
+            <h3 className="text-lg font-semibold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">Add New Customer</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               <input
-                type="text"
-                placeholder="Search customers..."
-                className="pl-8 pr-4 py-2 text-sm border rounded w-full"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
+                name="name"
+                value={formData.name}
+                onChange={handleFormChange}
+                placeholder="Full Name"
+                className="w-full px-3 py-2 text-sm border border-gray-200 dark:border-gray-600 rounded-lg bg-white/50 dark:bg-gray-700/50 focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200"
+              />
+              <input
+                name="phone"
+                value={formData.phone}
+                onChange={handleFormChange}
+                placeholder="Phone"
+                className="w-full px-3 py-2 text-sm border border-gray-200 dark:border-gray-600 rounded-lg bg-white/50 dark:bg-gray-700/50 focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200"
+              />
+              <input
+                name="email"
+                value={formData.email}
+                onChange={handleFormChange}
+                placeholder="Email"
+                className="w-full px-3 py-2 text-sm border border-gray-200 dark:border-gray-600 rounded-lg bg-white/50 dark:bg-gray-700/50 focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200"
+              />
+              <select
+                name="type"
+                value={formData.type}
+                onChange={handleFormChange}
+                className="w-full px-3 py-2 text-sm border border-gray-200 dark:border-gray-600 rounded-lg bg-white/50 dark:bg-gray-700/50 focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200"
+              >
+                <option value="Retail">Retail</option>
+                <option value="Wholesale">Wholesale</option>
+              </select>
+            </div>
+            <input
+              name="address"
+              value={formData.address}
+              onChange={handleFormChange}
+              placeholder="Address"
+              className="w-full px-3 py-2 text-sm border border-gray-200 dark:border-gray-600 rounded-lg bg-white/50 dark:bg-gray-700/50 focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200"
+            />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <input
+                name="tags"
+                value={formData.tags.join(',')}
+                onChange={handleFormChange}
+                placeholder="Tags (comma separated)"
+                className="w-full px-3 py-2 text-sm border border-gray-200 dark:border-gray-600 rounded-lg bg-white/50 dark:bg-gray-700/50 focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200"
+              />
+              <input
+                name="avatar"
+                value={formData.avatar}
+                onChange={handleFormChange}
+                placeholder="Avatar URL (optional)"
+                className="w-full px-3 py-2 text-sm border border-gray-200 dark:border-gray-600 rounded-lg bg-white/50 dark:bg-gray-700/50 focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200"
               />
             </div>
-            <select
-              onChange={(e) => setSortKey(e.target.value as any)}
-              className="text-sm border rounded px-2 py-1"
+            <textarea
+              name="notes"
+              value={formData.notes}
+              onChange={handleFormChange}
+              placeholder="Notes"
+              rows={3}
+              className="w-full px-3 py-2 text-sm border border-gray-200 dark:border-gray-600 rounded-lg bg-white/50 dark:bg-gray-700/50 focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200 resize-none"
+            />
+            <motion.button
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={addCustomer}
+              className="w-full bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white px-4 py-2 rounded-lg font-medium text-sm shadow-sm transition-all duration-200"
             >
-              <option value="name">Sort by Name</option>
-              <option value="loyaltyPoints">Sort by Loyalty Points</option>
-            </select>
-          </div>
+              <UserPlus className="h-4 w-4 inline mr-2" />
+              Save Customer
+            </motion.button>
+          </motion.div>
+        )}
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {filteredCustomers.map((c) => (
-              <div key={c.id} className="bg-white dark:bg-gray-800 p-4 rounded shadow text-sm space-y-2">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <img
-                      src={c.avatar || 'https://placehold.co/48x48'}
-                      alt="avatar"
-                      className="w-12 h-12 rounded-full object-cover"
-                    />
-                    <div>
-                      <p className="font-bold">{c.name}</p>
-                      <p className="text-xs text-gray-500 dark:text-gray-400">{c.type} Customer</p>
-                    </div>
-                  </div>
-                  <button onClick={() => deleteCustomer(c.id)} title="Delete" className="text-red-500 hover:text-red-700">
-                    <Trash2 size={18} />
-                  </button>
+        {/* All Customers */}
+        {activeTab === 'all' && (
+          <>
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-white/20 dark:border-gray-600/20 rounded-lg p-3 shadow-lg"
+            >
+              <div className="flex flex-wrap items-center gap-3">
+                <div className="relative flex-1 min-w-64">
+                  <Search className="absolute left-3 top-2.5 text-gray-400" size={14} />
+                  <input
+                    type="text"
+                    placeholder="Search customers..."
+                    className="pl-9 pr-4 py-2 text-sm border border-gray-200 dark:border-gray-600 rounded-lg bg-white/50 dark:bg-gray-700/50 focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200 w-full"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                  />
                 </div>
-                <div>
-                  <p>📞 {c.phone}</p>
-                  <p>📧 {c.email}</p>
-                  <p>🏠 {c.address}</p>
-                  <p>🎯 Tags: {Array.isArray(c.tags) ? c.tags.join(', ') : 'None'}</p>
-                  <p>📝 Notes: {c.notes || '—'}</p>
-                  <p>⭐ Loyalty: {c.loyaltyPoints} pts</p>
-                  <p className="text-xs text-gray-400">Created: {formatDate(c.createdAt)}</p>
-                </div>
-                <div className="space-y-1">
-                  <p className="font-semibold mt-2">Sales History:</p>
-                  {Array.isArray(c.salesHistory) && c.salesHistory.length > 0 ? (
-                    c.salesHistory.map((inv) => (
-                      <p key={inv.invoiceId}>🧾 #{inv.invoiceId} – {inv.date} – ${inv.amount}</p>
-                    ))
-                  ) : (
-                    <p className="text-xs text-gray-500 italic">No invoices yet</p>
-                  )}
-                </div>
-                <div className="flex gap-2 mt-2 text-xs">
-                  <Link
-                    href={`/sales?saleFor=${c.id}`}
-                    className="bg-primary text-white px-2 py-1 rounded flex items-center gap-1"
-                  >
-                    <ArrowRight size={14} /> New Sale
-                  </Link>
-                  <Link
-                    href={`/customers/${c.id}`}
-                    className="bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white px-2 py-1 rounded"
-                  >
-                    View Profile
-                  </Link>
-                </div>
+                <select
+                  onChange={(e) => setSortKey(e.target.value as any)}
+                  className="text-sm border border-gray-200 dark:border-gray-600 rounded-lg px-3 py-2 bg-white/50 dark:bg-gray-700/50 focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200"
+                >
+                  <option value="name">Sort by Name</option>
+                  <option value="loyaltyPoints">Sort by Loyalty Points</option>
+                </select>
               </div>
-            ))}
-          </div>
+            </motion.div>
 
-          {filteredCustomers.length === 0 && (
-            <div className="text-center text-gray-500 mt-6">No customers found.</div>
-          )}
-        </>
-      )}
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
+              <AnimatePresence>
+                {filteredCustomers.map((c, index) => (
+                  <motion.div
+                    key={c.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.9 }}
+                    transition={{ delay: index * 0.05 }}
+                    className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-white/20 dark:border-gray-600/20 rounded-lg p-3 shadow-lg hover:shadow-xl transition-all duration-200 text-sm space-y-2"
+                  >
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <img
+                          src={c.avatar || 'https://placehold.co/40x40'}
+                          alt="avatar"
+                          className="w-10 h-10 rounded-full object-cover border-2 border-green-200 dark:border-green-700"
+                        />
+                        <div>
+                          <p className="font-bold text-sm text-gray-800 dark:text-gray-200">{c.name}</p>
+                          <p className="text-xs text-green-600 dark:text-green-400 font-medium">{c.type} Customer</p>
+                        </div>
+                      </div>
+                      <motion.button
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
+                        onClick={() => deleteCustomer(c.id)}
+                        title="Delete"
+                        className="text-red-500 hover:text-red-700 p-1 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20 transition-all duration-200"
+                      >
+                        <Trash2 size={16} />
+                      </motion.button>
+                    </div>
+                    <div className="space-y-1">
+                      <p className="text-xs text-gray-600 dark:text-gray-400">📞 {c.phone}</p>
+                      <p className="text-xs text-gray-600 dark:text-gray-400">📧 {c.email}</p>
+                      <p className="text-xs text-gray-600 dark:text-gray-400">🏠 {c.address}</p>
+                      <p className="text-xs text-gray-600 dark:text-gray-400">🎯 Tags: {Array.isArray(c.tags) ? c.tags.join(', ') : 'None'}</p>
+                      <p className="text-xs text-gray-600 dark:text-gray-400">📝 Notes: {c.notes || '—'}</p>
+                      <div className="flex items-center justify-between">
+                        <p className="text-xs font-semibold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">⭐ {c.loyaltyPoints} pts</p>
+                        <p className="text-xs text-gray-400">Created: {formatDate(c.createdAt)}</p>
+                      </div>
+                    </div>
+                    <div className="space-y-1">
+                      <p className="font-semibold text-xs text-gray-700 dark:text-gray-300">Sales History:</p>
+                      {Array.isArray(c.salesHistory) && c.salesHistory.length > 0 ? (
+                        c.salesHistory.slice(0, 2).map((inv) => (
+                          <p key={inv.invoiceId} className="text-xs text-gray-600 dark:text-gray-400">🧾 #{inv.invoiceId} – {inv.date} – ${inv.amount}</p>
+                        ))
+                      ) : (
+                        <p className="text-xs text-gray-500 italic">No invoices yet</p>
+                      )}
+                    </div>
+                    <div className="flex gap-2 mt-3">
+                      <Link
+                        href={`/sales?saleFor=${c.id}`}
+                        className="flex-1"
+                      >
+                        <motion.button
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                          className="w-full bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white px-2 py-1.5 rounded-lg flex items-center justify-center gap-1 text-xs font-medium shadow-sm transition-all duration-200"
+                        >
+                          <ArrowRight size={12} /> New Sale
+                        </motion.button>
+                      </Link>
+                      <Link
+                        href={`/customers/${c.id}`}
+                        className="flex-1"
+                      >
+                        <motion.button
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                          className="w-full bg-white/50 dark:bg-gray-700/50 border border-gray-200 dark:border-gray-600 text-gray-700 dark:text-gray-300 px-2 py-1.5 rounded-lg text-xs font-medium hover:bg-white/70 dark:hover:bg-gray-700/70 transition-all duration-200"
+                        >
+                          View Profile
+                        </motion.button>
+                      </Link>
+                    </div>
+                  </motion.div>
+                ))}
+              </AnimatePresence>
+            </div>
+
+            {filteredCustomers.length === 0 && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="col-span-full text-center py-8"
+              >
+                <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-white/20 dark:border-gray-600/20 rounded-lg p-6 shadow-lg">
+                  <Users className="h-12 w-12 text-gray-400 mx-auto mb-3" />
+                  <p className="text-gray-500 dark:text-gray-400 text-sm">No customers found.</p>
+                  <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">Try adjusting your search or add a new customer.</p>
+                </div>
+              </motion.div>
+            )}
+          </>
+        )}
+    </motion.div>
     </div>
   );
 }

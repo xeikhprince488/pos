@@ -85,7 +85,7 @@ export default function DashboardPage() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_60%,rgba(16,185,129,0.1),transparent_50%)]" />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto p-6 space-y-6">
+      <div className="relative z-10 max-w-7xl mx-auto p-2 space-y-2">
         {/* Professional Header */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -100,14 +100,14 @@ export default function DashboardPage() {
               <div className="absolute inset-0 bg-white/90 dark:bg-black/80 backdrop-blur-md rounded-2xl" />
             </div>
 
-            <div className="relative z-10 p-6">
+            <div className="relative z-10 p-3">
               <div className="flex items-center justify-between">
                 {/* Left Side - Title and Icon */}
-                <div className="flex items-center space-x-4">
+                <div className="flex items-center space-x-2">
                   {/* Dashboard Icon/Badge */}
                   <div className="relative group/icon">
-                    <div className="p-2 rounded-lg bg-gradient-to-br from-green-400/10 via-green-300/5 to-green-400/10 group-hover/icon:from-green-400/15 group-hover/icon:to-green-400/15 transition-all duration-300">
-                      <Activity className="w-5 h-5 text-green-500" />
+                    <div className="p-1 rounded-md bg-gradient-to-br from-green-400/10 via-green-300/5 to-green-400/10 group-hover/icon:from-green-400/15 group-hover/icon:to-green-400/15 transition-all duration-300">
+                      <Activity className="w-3 h-3 text-green-500" />
                     </div>
                     {/* Subtle glow */}
                     <div className="absolute inset-0 bg-gradient-to-r from-green-400/20 to-green-500/20 blur-xl opacity-0 group-hover/icon:opacity-100 transition-opacity duration-500" />
@@ -116,14 +116,14 @@ export default function DashboardPage() {
                   {/* Title Section */}
                   <div className="space-y-1">
                     <h1 className="relative group/title">
-                      <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 dark:from-white dark:via-gray-100 dark:to-white tracking-tight group-hover/title:from-green-600 group-hover/title:via-green-500 group-hover/title:to-emerald-600 dark:group-hover/title:from-green-400 dark:group-hover/title:via-green-300 dark:group-hover/title:to-emerald-400 transition-all duration-500">
+                      <span className="text-base font-bold bg-clip-text text-transparent bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 dark:from-white dark:via-gray-100 dark:to-white tracking-tight group-hover/title:from-green-600 group-hover/title:via-green-500 group-hover/title:to-emerald-600 dark:group-hover/title:from-green-400 dark:group-hover/title:via-green-300 dark:group-hover/title:to-emerald-400 transition-all duration-500">
                         POS Dashboard
                       </span>
                       {/* Subtle underline effect */}
                       <div className="absolute -bottom-1 left-0 h-0.5 w-0 bg-gradient-to-r from-green-400 to-emerald-500 group-hover/title:w-full transition-all duration-500" />
                     </h1>
                     <p className="text-xs text-gray-600 dark:text-gray-400 font-medium">
-                      Daily business overview and sales management
+                      Daily business overview
                     </p>
                   </div>
                 </div>
@@ -135,7 +135,7 @@ export default function DashboardPage() {
                       Store Status
                     </p>
                     <p className="text-xs text-gray-500 dark:text-gray-400">
-                      🟢 Open • {new Date().toLocaleDateString()}
+                      🟢 Open • Today
                     </p>
                   </div>
                 </div>
@@ -148,7 +148,7 @@ export default function DashboardPage() {
         </motion.div>
 
         {/* Primary Metrics Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2">
           <StatCard
             title="Today's Sales"
             value={`$${todaysSales.toLocaleString()}`}
@@ -184,7 +184,7 @@ export default function DashboardPage() {
         </div>
 
         {/* Secondary Metrics Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2">
           <StatCard
             title="Low Stock Items"
             value={lowStockItems.length.toString()}
@@ -233,18 +233,18 @@ export default function DashboardPage() {
               <div className="absolute inset-0 bg-white/90 dark:bg-black/80 backdrop-blur-md rounded-2xl" />
             </div>
 
-            <div className="relative z-10 p-6">
-              <div className="flex items-center justify-between mb-6">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+            <div className="relative z-10 p-3">
+              <div className="flex items-center justify-between mb-3">
+                <h3 className="text-sm font-semibold text-gray-900 dark:text-white">
                   Sales Analytics
                 </h3>
-                <div className="px-3 py-1 bg-green-50 dark:bg-green-900/20 rounded-xl">
+                <div className="px-2 py-0.5 bg-green-50 dark:bg-green-900/20 rounded-md">
                   <span className="text-xs font-medium text-green-700 dark:text-green-400">
                     Last 7 Days
                   </span>
                 </div>
               </div>
-              <div className="h-80">
+              <div className="h-32">
                 <ResponsiveContainer width="100%" height="100%">
                   <LineChart data={salesData}>
                     <CartesianGrid strokeDasharray="3 3" stroke="#e0e7ff" />
@@ -294,7 +294,7 @@ export default function DashboardPage() {
         </motion.div>
 
         {/* Top Products & Low Stock Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-2">
           {/* Top Products */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -309,18 +309,18 @@ export default function DashboardPage() {
                 <div className="absolute inset-0 bg-white/90 dark:bg-black/80 backdrop-blur-md rounded-2xl" />
               </div>
 
-              <div className="relative z-10 p-6">
-                <div className="flex items-center justify-between mb-6">
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+              <div className="relative z-10 p-3">
+                <div className="flex items-center justify-between mb-3">
+                  <h3 className="text-sm font-semibold text-gray-900 dark:text-white">
                     Top Products
                   </h3>
-                  <div className="px-3 py-1 bg-green-50 dark:bg-green-900/20 rounded-xl">
+                  <div className="px-2 py-0.5 bg-green-50 dark:bg-green-900/20 rounded-md">
                     <span className="text-xs font-medium text-green-700 dark:text-green-400">
                       Best Sellers
                     </span>
                   </div>
                 </div>
-                <div className="space-y-3">
+                <div className="space-y-1.5">
                   {topProducts.map((item, idx) => (
                     <motion.div 
                       key={idx}
@@ -328,12 +328,12 @@ export default function DashboardPage() {
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: 1.1 + idx * 0.1 }}
                       whileHover={{ scale: 1.02, x: 5 }}
-                      className="flex items-center justify-between p-4 bg-white/60 dark:bg-gray-700/60 backdrop-blur-sm rounded-xl border border-white/30 dark:border-gray-600/30 hover:bg-white/80 dark:hover:bg-gray-600/80 transition-all duration-300 cursor-pointer"
+                      className="flex items-center justify-between p-2 bg-white/60 dark:bg-gray-700/60 backdrop-blur-sm rounded-md border border-white/30 dark:border-gray-600/30 hover:bg-white/80 dark:hover:bg-gray-600/80 transition-all duration-300 cursor-pointer"
                     >
-                      <div className="flex items-center space-x-3">
+                      <div className="flex items-center space-x-2">
                         <motion.div 
                           whileHover={{ scale: 1.1, rotate: 5 }}
-                          className={`w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold text-sm shadow-lg ${
+                          className={`w-6 h-6 rounded-md flex items-center justify-center text-white font-bold text-xs shadow-lg ${
                             idx === 0 ? 'bg-gradient-to-br from-yellow-500 to-orange-500' :
                             idx === 1 ? 'bg-gradient-to-br from-gray-400 to-gray-600' :
                             idx === 2 ? 'bg-gradient-to-br from-orange-600 to-red-500' :
@@ -343,12 +343,12 @@ export default function DashboardPage() {
                           {idx + 1}
                         </motion.div>
                         <div>
-                          <h4 className="font-semibold text-gray-900 dark:text-white">{item.name}</h4>
-                          <p className="text-xs text-gray-600 dark:text-gray-400">{item.sales} units sold</p>
+                          <h4 className="font-medium text-xs text-gray-900 dark:text-white">{item.name}</h4>
+                          <p className="text-xs text-gray-600 dark:text-gray-400">{item.sales} units</p>
                         </div>
                       </div>
                       <div className="text-right">
-                        <p className="font-bold text-gray-900 dark:text-white">{item.sales}</p>
+                        <p className="font-bold text-xs text-gray-900 dark:text-white">{item.sales}</p>
                         <p className="text-xs text-gray-600 dark:text-gray-400">Sales</p>
                       </div>
                     </motion.div>
@@ -372,18 +372,18 @@ export default function DashboardPage() {
                 <div className="absolute inset-0 bg-white/90 dark:bg-black/80 backdrop-blur-md rounded-2xl" />
               </div>
 
-              <div className="relative z-10 p-6">
-                <div className="flex items-center justify-between mb-6">
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+              <div className="relative z-10 p-3">
+                <div className="flex items-center justify-between mb-3">
+                  <h3 className="text-sm font-semibold text-gray-900 dark:text-white">
                     Low Stock Alerts
                   </h3>
-                  <div className="px-3 py-1 bg-red-50 dark:bg-red-900/20 rounded-xl">
+                  <div className="px-2 py-0.5 bg-red-50 dark:bg-red-900/20 rounded-md">
                     <span className="text-xs font-medium text-red-700 dark:text-red-400">
                       {lowStockItems.length + outOfStockItems.length} Alerts
                     </span>
                   </div>
                 </div>
-                <div className="space-y-3">
+                <div className="space-y-1.5">
                   {[...lowStockItems, ...outOfStockItems].slice(0, 5).map((item, index) => (
                     <motion.div
                       key={item.name}
@@ -391,28 +391,28 @@ export default function DashboardPage() {
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: 1.2 + index * 0.1 }}
                       whileHover={{ scale: 1.02, x: 5 }}
-                      className={`p-4 rounded-xl border transition-all duration-300 cursor-pointer ${
+                      className={`p-2 rounded-md border transition-all duration-300 cursor-pointer ${
                         item.quantity === 0
                           ? 'bg-red-50/80 dark:bg-red-900/30 border-red-200/60 dark:border-red-700/60 hover:bg-red-100/80 dark:hover:bg-red-800/40'
                           : 'bg-yellow-50/80 dark:bg-yellow-900/30 border-yellow-200/60 dark:border-yellow-700/60 hover:bg-yellow-100/80 dark:hover:bg-yellow-800/40'
                       }`}
                     >
                       <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-3">
+                        <div className="flex items-center space-x-2">
                           <motion.div 
                             whileHover={{ scale: 1.1 }}
-                            className={`w-10 h-10 rounded-lg flex items-center justify-center shadow-lg ${
+                            className={`w-6 h-6 rounded-md flex items-center justify-center shadow-lg ${
                               item.quantity === 0
                                 ? 'bg-gradient-to-br from-red-500 to-red-600 text-white'
                                 : 'bg-gradient-to-br from-yellow-500 to-orange-500 text-white'
                             }`}
                           >
-                            {item.quantity === 0 ? <AlertTriangle size={16} /> : <Package size={16} />}
+                            {item.quantity === 0 ? <AlertTriangle size={12} /> : <Package size={12} />}
                           </motion.div>
                           <div>
-                            <h4 className="font-semibold text-gray-900 dark:text-white">{item.name}</h4>
+                            <h4 className="font-medium text-xs text-gray-900 dark:text-white">{item.name}</h4>
                             <p className="text-xs text-gray-600 dark:text-gray-400">
-                              {item.quantity} units remaining
+                              {item.quantity} units
                             </p>
                           </div>
                         </div>
@@ -438,7 +438,7 @@ export default function DashboardPage() {
                   transition={{ delay: 1.8 }}
                   whileHover={{ scale: 1.02, y: -2 }}
                   whileTap={{ scale: 0.98 }}
-                  className="w-full mt-4 p-3 bg-gradient-to-r from-green-500 via-emerald-500 to-green-600 text-white rounded-xl font-semibold hover:from-green-600 hover:via-emerald-600 hover:to-green-700 transition-all duration-300 shadow-lg hover:shadow-xl text-sm"
+                  className="w-full mt-2 p-1.5 bg-gradient-to-r from-green-500 via-emerald-500 to-green-600 text-white rounded-md font-medium hover:from-green-600 hover:via-emerald-600 hover:to-green-700 transition-all duration-300 shadow-lg hover:shadow-xl text-xs"
                 >
                   View All Alerts
                 </motion.button>
@@ -461,7 +461,7 @@ export default function DashboardPage() {
                 {/* Glass Background */}
                 <div className="absolute inset-0 bg-white/90 dark:bg-black/80 backdrop-blur-md rounded-2xl" />
               </div>
-              <div className="relative z-10 p-6">
+              <div className="relative z-10 p-3">
                 <RecentActivity />
               </div>
             </div>
@@ -478,7 +478,7 @@ export default function DashboardPage() {
                 {/* Glass Background */}
                 <div className="absolute inset-0 bg-white/90 dark:bg-black/80 backdrop-blur-md rounded-2xl" />
               </div>
-              <div className="relative z-10 p-6">
+              <div className="relative z-10 p-3">
                 <QuickAccess />
               </div>
             </div>
@@ -519,19 +519,19 @@ function StatCard({
           <div className="absolute inset-0 bg-white/90 dark:bg-black/80 backdrop-blur-md rounded-2xl" />
         </div>
         
-        <div className="relative z-10 p-6">
-          <div className="flex items-center justify-between mb-4">
+        <div className="relative z-10 p-3">
+          <div className="flex items-center justify-between mb-2">
             <motion.div 
               whileHover={{ scale: 1.1, rotate: 5 }}
-              className="p-3 bg-gradient-to-br from-green-500 to-emerald-600 backdrop-blur-sm border border-white/30 dark:border-gray-600/30 rounded-xl shadow-lg"
+              className="p-1.5 bg-gradient-to-br from-green-500 to-emerald-600 backdrop-blur-sm border border-white/30 dark:border-gray-600/30 rounded-md shadow-lg"
             >
-              <Icon className="w-5 h-5 text-white" />
+              <Icon className="w-3 h-3 text-white" />
             </motion.div>
             <motion.div 
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ delay: delay + 0.2 }}
-              className={`text-xs font-semibold px-3 py-1 rounded-full backdrop-blur-sm border shadow-lg ${
+              className={`text-xs font-semibold px-1.5 py-0.5 rounded-full backdrop-blur-sm border shadow-lg ${
                 trendUp 
                   ? 'bg-green-100/80 dark:bg-green-900/40 text-green-700 dark:text-green-400 border-green-200/50 dark:border-green-700/50' 
                   : 'bg-red-100/80 dark:bg-red-900/40 text-red-700 dark:text-red-400 border-red-200/50 dark:border-red-700/50'
@@ -544,7 +544,7 @@ function StatCard({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: delay + 0.1 }}
-            className="text-gray-600 dark:text-gray-300 text-sm font-medium mb-2 uppercase tracking-wide"
+            className="text-gray-600 dark:text-gray-300 text-xs font-medium mb-0.5 uppercase tracking-wide"
           >
             {title}
           </motion.p>
@@ -552,7 +552,7 @@ function StatCard({
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: delay + 0.2 }}
-            className="text-2xl font-bold text-gray-900 dark:text-white"
+            className="text-lg font-bold text-gray-900 dark:text-white"
           >
             {value}
           </motion.p>

@@ -2,7 +2,10 @@
 
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import { PlusCircle, Edit2, Trash2, UserCog } from 'lucide-react';
+import { PlusCircle, Edit2, Trash2, UserCog, Users } from 'lucide-react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
 
 type User = {
   id: number;
@@ -20,60 +23,88 @@ export default function UsersPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6 text-gray-800">
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold">User Management</h1>
-        <Link
-          href="/users/add"
-          className="flex items-center bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-semibold shadow"
-        >
-          <PlusCircle className="mr-2 h-4 w-4" />
-          Add User
-        </Link>
-      </div>
+    <div className="min-h-screen bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 p-4">
+      <div className="max-w-7xl mx-auto space-y-4">
+        {/* Header */}
+        <Card className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-white/20 dark:border-gray-600/20 shadow-lg">
+          <CardHeader className="p-4">
+            <div className="flex justify-between items-center">
+              <div>
+                <CardTitle className="text-xl font-bold text-gray-900 dark:text-gray-100 flex items-center gap-2">
+                  <Users className="h-5 w-5 text-green-600 dark:text-green-400" />
+                  User Management
+                </CardTitle>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">Manage system users and their permissions</p>
+              </div>
+              <Button asChild className="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white h-8 px-3 text-sm font-medium">
+                <Link href="/users/add">
+                  <PlusCircle className="h-3 w-3 mr-1" />
+                  Add User
+                </Link>
+              </Button>
+            </div>
+          </CardHeader>
+        </Card>
 
-      <div className="bg-white rounded-xl shadow border border-gray-200 p-4">
-        {users.length === 0 ? (
-          <p className="text-gray-500">No users found.</p>
-        ) : (
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="text-left border-b border-gray-200 text-gray-600">
-                <th className="py-3">Name</th>
-                <th>Email</th>
-                <th>Role</th>
-                <th className="text-right">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {users.map((user, index) => (
-                <tr
-                  key={user.id || index}
-                  className="border-b border-gray-100 hover:bg-gray-50 transition"
-                >
-                  <td className="py-3">{user.name}</td>
-                  <td>{user.email}</td>
-                  <td>
-                    <span className="px-2 py-1 text-xs bg-gray-100 text-gray-700 rounded-full">
-                      {user.role}
-                    </span>
-                  </td>
-                  <td className="text-right space-x-2">
-                    <button className="text-blue-500 hover:text-blue-700">
-                      <Edit2 size={16} />
-                    </button>
-                    <button className="text-red-500 hover:text-red-700">
-                      <Trash2 size={16} />
-                    </button>
-                    <button className="text-gray-500 hover:text-gray-700">
-                      <UserCog size={16} />
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        )}
+        {/* Users Table */}
+        <Card className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-white/20 dark:border-gray-600/20 shadow-lg">
+          <CardHeader className="p-4 pb-2">
+            <CardTitle className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+              Users ({users.length})
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="p-4 pt-0">
+            {users.length === 0 ? (
+              <div className="text-center py-8">
+                <Users className="h-12 w-12 text-gray-400 mx-auto mb-3" />
+                <p className="text-gray-500 dark:text-gray-400 text-sm">No users found.</p>
+                <p className="text-gray-400 dark:text-gray-500 text-xs mt-1">Add your first user to get started.</p>
+              </div>
+            ) : (
+              <div className="overflow-x-auto">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="text-left border-b border-gray-200 dark:border-gray-600 text-gray-600 dark:text-gray-400">
+                      <th className="py-2 text-xs font-medium uppercase tracking-wider">Name</th>
+                      <th className="py-2 text-xs font-medium uppercase tracking-wider">Email</th>
+                      <th className="py-2 text-xs font-medium uppercase tracking-wider">Role</th>
+                      <th className="py-2 text-xs font-medium uppercase tracking-wider text-right">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {users.map((user, index) => (
+                      <tr
+                        key={user.id || index}
+                        className="border-b border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors"
+                      >
+                        <td className="py-3 text-gray-900 dark:text-gray-100 font-medium">{user.name}</td>
+                        <td className="py-3 text-gray-600 dark:text-gray-300">{user.email}</td>
+                        <td className="py-3">
+                          <Badge variant="secondary" className="text-xs">
+                            {user.role}
+                          </Badge>
+                        </td>
+                        <td className="py-3 text-right">
+                          <div className="flex items-center justify-end gap-1">
+                            <Button variant="ghost" size="sm" className="h-7 w-7 p-0 text-green-500 hover:text-green-700 hover:bg-green-50">
+                              <Edit2 className="h-3 w-3" />
+                            </Button>
+                            <Button variant="ghost" size="sm" className="h-7 w-7 p-0 text-red-500 hover:text-red-700 hover:bg-red-50">
+                              <Trash2 className="h-3 w-3" />
+                            </Button>
+                            <Button variant="ghost" size="sm" className="h-7 w-7 p-0 text-gray-500 hover:text-gray-700 hover:bg-gray-50">
+                              <UserCog className="h-3 w-3" />
+                            </Button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </CardContent>
+        </Card>
       </div>
     </div>
   );

@@ -12,6 +12,7 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
+import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import { Pacifico } from 'next/font/google';
 import {
@@ -46,7 +47,7 @@ interface SidebarProps {
 
 export default function Sidebar({ collapsed }: SidebarProps) {
   const [, setOpenMenu] = useState<string | null>(null);
-  const pathname = '/dashboard'; // This would come from usePathname in real implementation
+  const pathname = usePathname();
 
   const handleNavigation = (href: string) => {
     // Handle navigation logic here
@@ -55,7 +56,11 @@ export default function Sidebar({ collapsed }: SidebarProps) {
 
   // Helper function to check if a menu item is active
   const isMenuItemActive = (href: string) => {
-    return pathname === href;
+    // Handle exact matches and sub-routes
+    if (href === '/dashboard') {
+      return pathname === '/' || pathname === '/dashboard';
+    }
+    return pathname.startsWith(href);
   };
 
   return (

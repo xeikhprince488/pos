@@ -1,7 +1,12 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Settings, User, Palette, Lock } from 'lucide-react';
+import { Settings, User, Palette, Lock, Save } from 'lucide-react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Switch } from '@/components/ui/switch';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Button } from '@/components/ui/button';
 
 export default function SettingsPage() {
   const [darkMode, setDarkMode] = useState(false);
@@ -38,120 +43,142 @@ export default function SettingsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-800 p-6 transition-colors duration-300">
-      <div className="max-w-4xl mx-auto space-y-6">
-
-        {/* Page Header */}
-        <div className="flex items-center justify-between mb-4">
-          <h1 className="text-3xl font-bold text-black dark:text-white flex items-center gap-2">
-            <Settings className="w-7 h-7" />
-            Settings
-          </h1>
+    <div className="min-h-screen bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 p-4 space-y-4">
+      {/* Header */}
+      <div className="bg-gradient-to-br from-green-50 to-emerald-100 dark:from-green-950/20 dark:to-emerald-950/20 p-4 rounded-xl border border-green-200/50 dark:border-green-800/50">
+        <div className="flex items-center gap-2 mb-1">
+          <Settings className="h-5 w-5 text-green-600 dark:text-green-400" />
+          <h1 className="text-xl font-bold text-gray-900 dark:text-gray-100">Settings</h1>
         </div>
+        <p className="text-sm text-gray-600 dark:text-gray-400">Manage your account preferences and system configuration</p>
+      </div>
 
-        {/* General Settings */}
-        <section className="bg-gray-100  rounded-xl shadow p-6 space-y-4">
-          <h2 className="text-xl font-semibold flex items-center gap-2 text-gray-800">
-            <User size={20} />
+      {/* General Settings */}
+      <Card className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-white/20 dark:border-gray-600/20 shadow-lg">
+        <CardHeader className="p-4 pb-2">
+          <CardTitle className="text-lg font-semibold text-gray-900 dark:text-gray-100 flex items-center gap-2">
+            <User className="h-4 w-4 text-blue-600 dark:text-blue-400" />
             General
-          </h2>
-          <div className="grid md:grid-cols-2 gap-4 text-sm">
-            <div>
-              <label className="block mb-1 font-medium">Business Name</label>
-              <input
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="p-4 pt-0">
+          <div className="grid md:grid-cols-2 gap-4">
+            <div className="space-y-1">
+              <Label htmlFor="businessName" className="text-xs font-medium text-gray-700 dark:text-gray-300">Business Name</Label>
+              <Input
+                id="businessName"
                 type="text"
                 value={businessName}
                 onChange={(e) => setBusinessName(e.target.value)}
-                className="w-full px-3 py-2 rounded-md border border-gray-300 bg-white focus:outline-none focus:ring-2 focus:ring-[#DCD0FF]"
+                className="h-8 text-sm"
               />
             </div>
-            <div>
-              <label className="block mb-1 font-medium">Owner Name</label>
-              <input
+            <div className="space-y-1">
+              <Label htmlFor="ownerName" className="text-xs font-medium text-gray-700 dark:text-gray-300">Owner Name</Label>
+              <Input
+                id="ownerName"
                 type="text"
                 value={ownerName}
                 onChange={(e) => setOwnerName(e.target.value)}
-                className="w-full px-3 py-2 rounded-md border border-gray-300 bg-white focus:outline-none focus:ring-2 focus:ring-[#DCD0FF]"
+                className="h-8 text-sm"
               />
             </div>
           </div>
-        </section>
+        </CardContent>
+      </Card>
 
-        {/* Preferences */}
-        <section className="bg-gray-100 rounded-xl shadow p-6 space-y-4">
-          <h2 className="text-xl font-semibold flex items-center gap-2 text-gray-800">
-            <Palette size={20} />
+      {/* Preferences */}
+      <Card className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-white/20 dark:border-gray-600/20 shadow-lg">
+        <CardHeader className="p-4 pb-2">
+          <CardTitle className="text-lg font-semibold text-gray-900 dark:text-gray-100 flex items-center gap-2">
+            <Palette className="h-4 w-4 text-green-600 dark:text-green-400" />
             Preferences
-          </h2>
-          <div className="space-y-4 text-sm">
-            <div className="flex items-center justify-between">
-              <span>Enable Dark Mode</span>
-              <label className="relative inline-flex items-center cursor-pointer">
-                <input
-                  type="checkbox"
-                  className="sr-only peer"
-                  checked={darkMode}
-                  onChange={handleDarkModeToggle}
-                />
-                <div className="w-11 h-6 bg-gray-300 peer-focus:outline-none rounded-full peer-checked:bg-[#DCD0FF]"></div>
-                <span className="ml-2 text-xs">{darkMode ? 'On' : 'Off'}</span>
-              </label>
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="p-4 pt-0">
+          <div className="space-y-4">
+            <div className="flex items-center justify-between py-2">
+              <div className="space-y-0.5">
+                <Label className="text-sm font-medium text-gray-900 dark:text-gray-100">Enable Dark Mode</Label>
+                <p className="text-xs text-gray-600 dark:text-gray-400">Switch between light and dark themes</p>
+              </div>
+              <Switch
+                checked={darkMode}
+                onCheckedChange={handleDarkModeToggle}
+              />
             </div>
-            <div className="flex items-center justify-between">
-              <span>Email Notifications</span>
-              <label className="relative inline-flex items-center cursor-pointer">
-                <input
-                  type="checkbox"
-                  className="sr-only peer"
-                  checked={emailNotifications}
-                  onChange={() => setEmailNotifications(!emailNotifications)}
-                />
-                <div className="w-11 h-6 bg-gray-300 peer-focus:outline-none rounded-full peer-checked:bg-[#DCD0FF]"></div>
-                <span className="ml-2 text-xs">{emailNotifications ? 'On' : 'Off'}</span>
-              </label>
+            <div className="flex items-center justify-between py-2">
+              <div className="space-y-0.5">
+                <Label className="text-sm font-medium text-gray-900 dark:text-gray-100">Email Notifications</Label>
+                <p className="text-xs text-gray-600 dark:text-gray-400">Receive updates via email</p>
+              </div>
+              <Switch
+                checked={emailNotifications}
+                onCheckedChange={setEmailNotifications}
+              />
             </div>
           </div>
-        </section>
+        </CardContent>
+      </Card>
 
-        {/* Account Security */}
-        <section className="bg-gray-100 rounded-xl shadow p-6 space-y-4">
-          <h2 className="text-xl font-semibold flex items-center gap-2 text-gray-800">
-            <Lock size={20} />
+      {/* Account Security */}
+      <Card className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-white/20 dark:border-gray-600/20 shadow-lg">
+        <CardHeader className="p-4 pb-2">
+          <CardTitle className="text-lg font-semibold text-gray-900 dark:text-gray-100 flex items-center gap-2">
+            <Lock className="h-4 w-4 text-red-600 dark:text-red-400" />
             Account & Security
-          </h2>
-          <div className="grid md:grid-cols-2 gap-4 text-sm">
-            <div>
-              <label className="block mb-1 font-medium">Email</label>
-              <input
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="p-4 pt-0">
+          <div className="grid md:grid-cols-2 gap-4">
+            <div className="space-y-1">
+              <Label htmlFor="email" className="text-xs font-medium text-gray-700 dark:text-gray-300">Email</Label>
+              <Input
+                id="email"
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-3 py-2 rounded-md border border-gray-300 bg-white focus:outline-none focus:ring-2 focus:ring-[#DCD0FF]"
+                className="h-8 text-sm"
               />
             </div>
-            <div>
-              <label className="block mb-1 font-medium">Password</label>
-              <input
+            <div className="space-y-1">
+              <Label htmlFor="password" className="text-xs font-medium text-gray-700 dark:text-gray-300">Password</Label>
+              <Input
+                id="password"
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-3 py-2 rounded-md border border-gray-300 bg-white focus:outline-none focus:ring-2 focus:ring-[#DCD0FF]"
+                placeholder="Enter new password"
+                className="h-8 text-sm"
               />
             </div>
           </div>
-        </section>
+        </CardContent>
+      </Card>
 
-        {/* Save Button */}
-        <div className="text-right">
-          <button
-            onClick={handleSave}
-            className="bg-[#DCD0FF] hover:bg-[#c8b8ff] text-black px-6 py-2 text-sm font-semibold rounded shadow transition"
-          >
-            Save Changes
-          </button>
-          {saveMessage && <p className="mt-2 text-green-600 text-sm">{saveMessage}</p>}
-        </div>
-      </div>
+      {/* Save Button */}
+      <Card className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-white/20 dark:border-gray-600/20 shadow-lg">
+        <CardContent className="p-4">
+          <div className="flex items-center justify-between">
+            <div>
+              <h3 className="text-sm font-medium text-gray-900 dark:text-gray-100">Save Changes</h3>
+              <p className="text-xs text-gray-600 dark:text-gray-400">Apply your settings and preferences</p>
+            </div>
+            <Button
+              onClick={handleSave}
+              className="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white h-8 px-4 text-sm font-medium"
+            >
+              <Save className="h-3 w-3 mr-1" />
+              Save Changes
+            </Button>
+          </div>
+          {saveMessage && (
+            <div className="mt-3 p-2 bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 rounded-lg">
+              <p className="text-xs text-green-700 dark:text-green-400">{saveMessage}</p>
+            </div>
+          )}
+        </CardContent>
+      </Card>
     </div>
   );
 }
